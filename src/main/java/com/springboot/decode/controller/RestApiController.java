@@ -37,7 +37,13 @@ public class RestApiController {
 	@RequestMapping(value = "/translate2Human/{morseCode}", method = RequestMethod.GET)
 	public ResponseEntity<String> getUser(@PathVariable("morseCode") String morseCode) {
 
-		return new ResponseEntity<>("", HttpStatus.OK);
-	}
+        String humanStr = "";
+        try {
+            humanStr = this.decodeService.translate2Human(morseCode);
+        } catch (Exception ex){
+            return new ResponseEntity<>(humanStr, HttpStatus.BAD_REQUEST);
+        }
 
+		return new ResponseEntity<>(humanStr, HttpStatus.OK);
+	}
 }

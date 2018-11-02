@@ -11,7 +11,7 @@ import java.util.Map;
 @Service("decodeService")
 public class DecodeServiceImpl implements DecodeService {
 
-    final private String SEPARATE_WORD = " // ";
+    final private String SEPARATE_WORD = "    ";
     final private String CHAR_DOT = ".";
     final private String CHAR_LINE = "-";
     final private String CHAR_EMPTY = "";
@@ -94,11 +94,6 @@ public class DecodeServiceImpl implements DecodeService {
                 first = false;
             }
         }
-
-        System.out.println("Punto: " + dot);
-        System.out.println("Linea: " + line);
-        System.out.println("Espacio letra: " + letterSpace);
-        System.out.println("Espacio palabra: " + wordSpace);
 
         Map<String, String> params = new HashMap<>();
         params.put("CHAR_LINE" , line);
