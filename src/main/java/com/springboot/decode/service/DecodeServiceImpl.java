@@ -22,7 +22,7 @@ public class DecodeServiceImpl implements DecodeService {
     @Override
     public String decodeBits2Morse(String bits) {
 
-        String textInMorse = "";
+        String textInMorse;
 
         try {
             this.listBits = bits.replaceAll("0", " ").trim().split(" ");
@@ -32,17 +32,29 @@ public class DecodeServiceImpl implements DecodeService {
             throw new CustomErrorType("Ocurrio un error al procesar el pedido");
         }
 
-        return this.translateMorse(textInMorse);
+        return this.translateMorse2Human(textInMorse);
     }
 
     @Override
-    public String translate2Human(String morse) {
+    public String translate2Human(String morseCode) {
         return null;
     }
 
     @Override
-    public String decodeText2Mose(String texto) {
-        return null;
+    public String decodeText2Morse(String texto) {
+
+        String[] words = texto.toLowerCase().trim().split(" ");
+        String result = "";
+
+        for (String word : words) {
+            for (int w = 0; w < word.length(); w++) {
+                Character caracter = word.substring(w, w + 1).charAt(0);
+                result += MorseUtils.getMorseFromLetter(caracter) + " ";
+            }
+            result += "   ";
+        }
+
+        return result;
     }
 
     private String processBits(String bits, String[] listBits, String[] listPause) {
@@ -114,14 +126,12 @@ public class DecodeServiceImpl implements DecodeService {
         tempMorse = tempMorse.replaceAll(params.get("SEPARATE_LATTER"), " ");
         tempMorse = tempMorse.replaceAll("0", CHAR_EMPTY);
 
-        System.out.println("Previa " + tempMorse);
-
         return tempMorse;
     }
 
-    private String translateMorse(String morseText){
+    private String translateMorse2Human(String morseCode){
 
-        String[] splitWords = morseText.split(SEPARATE_WORD);
+        String[] splitWords = morseCode.split(SEPARATE_WORD);
         String translate = "";
         for(String words : splitWords){
             String[] letters = words.split(" ");

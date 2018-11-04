@@ -2,7 +2,7 @@ package com.springboot.decode.util;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,25 +13,11 @@ import java.util.Map;
 @Component
 public class MorseUtils {
 
-    char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-            'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-            ',', '.', '?'};
-
-    String[] dotties = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",
-            ".---", "-.-", ".-..", "--", "-.", "---", ".---.", "--.-", ".-.",
-            "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----",
-            "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.",
-            "-----", "--..--", ".-.-.-", "..--.."};
-
     private static Map<Character, String> letterToMorse;
     private static Map<String, Character> morseToLetter;
 
 
-    public MorseUtils() {
-        this.initData();
-    }
-
+    @PostConstruct
     private void initData(){
         //Cargo los mapas con la informacion para traducir
         letterToMorse = new HashMap<>();
@@ -85,8 +71,23 @@ public class MorseUtils {
         return morseToLetter.get(morseCode);
     }
 
-    public static String getMorseFromLetter(String letter){
+    public static String getMorseFromLetter(Character letter){
         return letterToMorse.get(letter);
     }
 
+    public static Map<Character, String> getLetterToMorse() {
+        return letterToMorse;
+    }
+
+    public static void setLetterToMorse(Map<Character, String> letterToMorse) {
+        MorseUtils.letterToMorse = letterToMorse;
+    }
+
+    public static Map<String, Character> getMorseToLetter() {
+        return morseToLetter;
+    }
+
+    public static void setMorseToLetter(Map<String, Character> morseToLetter) {
+        MorseUtils.morseToLetter = morseToLetter;
+    }
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class RestApiController {
 
-	public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
+	public static final Logger LOGGER = LoggerFactory.getLogger(RestApiController.class);
 
 	@Autowired
     DecodeService decodeService;
