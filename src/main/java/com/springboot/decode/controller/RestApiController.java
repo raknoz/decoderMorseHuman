@@ -22,7 +22,7 @@ public class RestApiController {
 	@Autowired
     DecodeService decodeService;
 
-    @PostMapping(value = "/decodeBits2Morse/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/translateBits2Morse/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ApiJsonResponse<String> decodeBits2Morse(@RequestBody String request) {
 
         ApiJsonResponse<String> response = new ApiJsonResponse<>();
@@ -44,7 +44,7 @@ public class RestApiController {
 		return response.success(HttpStatus.OK.value(), morseStr);
 	}
 
-    @PostMapping(value = "/translate2Human/")
+    @PostMapping(value = "/translateMorse2Human/")
 	public ApiJsonResponse<String> translate2Human(@RequestBody String morseCode) {
 
         ApiJsonResponse<String> response = new ApiJsonResponse<>();
@@ -58,7 +58,7 @@ public class RestApiController {
 		return response.success(HttpStatus.OK.value(), humanStr);
 	}
 
-    @PostMapping(value = "/translate2Morse/")
+    @PostMapping(value = "/translateHuman2Morse/")
     public ApiJsonResponse<String> translate2Morse(@RequestBody String humanCode) {
 
         ApiJsonResponse<String> response = new ApiJsonResponse<>();
