@@ -32,7 +32,7 @@ public class DecodeServiceImpl implements DecodeService {
             throw new CustomErrorType("Ocurrio un error al procesar el pedido");
         }
 
-        return this.translateMorse2Human(textInMorse);
+        return textInMorse;
     }
 
     @Override
