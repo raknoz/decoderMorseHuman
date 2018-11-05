@@ -32,7 +32,12 @@
     		<groupId>com.fasterxml.jackson.dataformat</groupId>
     		<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin><!-- Include if you want to make an executable jar[FAT JAR which 

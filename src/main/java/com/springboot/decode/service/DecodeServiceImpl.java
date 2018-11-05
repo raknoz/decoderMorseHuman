@@ -23,7 +23,6 @@ public class DecodeServiceImpl implements DecodeService {
     public String decodeBits2Morse(String bits) {
 
         String textInMorse;
-
         try {
             this.listBits = bits.replaceAll("0", " ").trim().split(" ");
             this.listPause = bits.replaceAll("1", " ").trim().split(" ");

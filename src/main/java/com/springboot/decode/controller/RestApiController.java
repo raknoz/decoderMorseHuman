@@ -1,15 +1,14 @@
 package com.springboot.decode.controller;
 
 import com.springboot.decode.service.DecodeService;
+import com.springboot.decode.util.ApiJsonResponse;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,30 +19,36 @@ public class RestApiController {
 	@Autowired
     DecodeService decodeService;
 
-	@RequestMapping(value = "/decodeBits2Morse/{bits}", method = RequestMethod.GET)
-	public ResponseEntity<String> decodeBits2Morse(@PathVariable("bits") String bits) {
+    @PostMapping(value = "/decodeBits2Morse/", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ApiJsonResponse<String> decodeBits2Morse(@RequestBody String request) {
+
+        ApiJsonResponse<String> response = new ApiJsonResponse<>();
 
         String morseStr = "";
-
 	    try {
+            JSONObject obj = new JSONObject(request);
+            String bits = obj.getString("bits");
             morseStr = this.decodeService.decodeBits2Morse(bits);
         } catch (Exception ex){
-            return new ResponseEntity<>(morseStr, HttpStatus.BAD_REQUEST);
+            return response.error(HttpStatus.BAD_REQUEST.value(), "Request Mal formado");
         }
 
-		return new ResponseEntity<>(morseStr, HttpStatus.OK);
+		return response.success(HttpStatus.OK.value(), morseStr);
 	}
 
-	@RequestMapping(value = "/translate2Human/{morseCode}", method = RequestMethod.GET)
-	public ResponseEntity<String> getUser(@PathVariable("morseCode") String morseCode) {
+    @PostMapping(value = "/translate2Human/")
+    @ResponseBody
+	public ApiJsonResponse<String> getUser(@RequestBody String morseCode) {
+
+        ApiJsonResponse<String> response = new ApiJsonResponse<>();
 
         String humanStr = "";
         try {
             humanStr = this.decodeService.translate2Human(morseCode);
         } catch (Exception ex){
-            return new ResponseEntity<>(humanStr, HttpStatus.BAD_REQUEST);
+            return response.error(HttpStatus.BAD_REQUEST.value(), humanStr);
         }
 
-		return new ResponseEntity<>(humanStr, HttpStatus.OK);
+		return response.success(HttpStatus.OK.value(), humanStr);
 	}
 }
