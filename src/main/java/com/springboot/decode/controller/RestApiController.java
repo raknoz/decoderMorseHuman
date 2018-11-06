@@ -37,6 +37,14 @@ public class RestApiController {
             if(!matcher.matches()){
                 return response.error(HttpStatus.BAD_REQUEST.value(), "Request con caracteres no incluidos");
             }
+
+            //Quito los espacios al principio y al final de la cadena de caracteres
+            int inicio = bits.indexOf("1");
+            int fin = bits.lastIndexOf("1");
+            if(inicio > 0 || fin < bits.length()){
+                bits = bits.substring(inicio, fin + 1);
+            }
+
             morseStr = this.decodeService.decodeBits2Morse(bits);
         } catch (Exception ex){
             return response.error(HttpStatus.BAD_REQUEST.value(), "Ocurrio un error al procesar el pedido");

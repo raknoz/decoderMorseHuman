@@ -37,7 +37,31 @@
             <artifactId>json</artifactId>
             <version>20140107</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.17.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+			<version>1.5.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test-autoconfigure</artifactId>
+			<version>1.5.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin><!-- Include if you want to make an executable jar[FAT JAR which 
