@@ -29,17 +29,17 @@ public class RestApiController {
         String morseStr;
 	    try {
             JSONObject obj = new JSONObject(request);
-            String bits = obj.getString("bits");
+            String bits = obj.getString("text");
             Pattern pattern = Pattern.compile("^[0-1]*$");
             Matcher matcher = pattern.matcher(bits);
 
-            //Valido que no ponga caracteres raros
+            //Valido que no ponga caracteres diferentes
             if(!matcher.matches()){
-                return response.error(HttpStatus.BAD_REQUEST.value(), "Request Mal formado");
+                return response.error(HttpStatus.BAD_REQUEST.value(), "Request con caracteres no incluidos");
             }
             morseStr = this.decodeService.decodeBits2Morse(bits);
         } catch (Exception ex){
-            return response.error(HttpStatus.BAD_REQUEST.value(), "Request Mal formado");
+            return response.error(HttpStatus.BAD_REQUEST.value(), "Ocurrio un error al procesar el pedido");
         }
 		return response.success(HttpStatus.OK.value(), morseStr);
 	}

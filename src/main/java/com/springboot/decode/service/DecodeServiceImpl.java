@@ -16,17 +16,14 @@ public class DecodeServiceImpl implements DecodeService {
     final private String CHAR_LINE = "-";
     final private String CHAR_EMPTY = "";
 
-    private String[] listBits;
-    private String[] listPause;
-
     @Override
     public String decodeBits2Morse(String bits) {
 
         String textInMorse;
         try {
-            this.listBits = bits.replaceAll("0", " ").trim().split(" ");
-            this.listPause = bits.replaceAll("1", " ").trim().split(" ");
-            textInMorse = processBits(bits, this.listBits, this.listPause);
+            String[] listBits = bits.replaceAll("0", " ").trim().split(" ");
+            String[] listPause = bits.replaceAll("1", " ").trim().split(" ");
+            textInMorse = processBits(bits, listBits, listPause);
         } catch (Exception ex){
             throw new CustomErrorType("Ocurrio un error al procesar el pedido");
         }
@@ -64,7 +61,7 @@ public class DecodeServiceImpl implements DecodeService {
         String line = "";
         Boolean first = true;
 
-        //Obtengo el valor en bits del punto y la linea
+        //Obtengo el valor en 1 del punto y la linea
         for (int x = 0; x < listBits.length; x++) {
 
             if (!first) {
@@ -88,7 +85,7 @@ public class DecodeServiceImpl implements DecodeService {
         Integer wordLimit = null;
         String letterSpace = "";
 
-        //Obtengo el valor del espacio entre palabras y letras
+        //Obtengo el valor en 0 del espacio entre palabras y letras
         first = true;
         for (int x = 0; x < listPause.length; x++) {
             if (!first) {
@@ -113,8 +110,6 @@ public class DecodeServiceImpl implements DecodeService {
         params.put("SEPARATE_WORD" , wordSpace);
 
         return this.generateMorseFromBits(bits, params);
-
-
     }
 
     private String generateMorseFromBits(String texto, Map<String, String> params){
