@@ -41,34 +41,39 @@ public class RestApiController {
         } catch (Exception ex){
             return response.error(HttpStatus.BAD_REQUEST.value(), "Ocurrio un error al procesar el pedido");
         }
+
 		return response.success(HttpStatus.OK.value(), morseStr);
 	}
 
     @PostMapping(value = "/translateMorse2Human/")
-	public ApiJsonResponse<String> translate2Human(@RequestBody String morseCode) {
+	public ApiJsonResponse<String> translate2Human(@RequestBody String request) {
 
         ApiJsonResponse<String> response = new ApiJsonResponse<>();
-        String humanStr = "";
+        String humanStr;
         try {
-            humanStr = this.decodeService.translate2Human(morseCode);
+            JSONObject obj = new JSONObject(request);
+            String text = obj.getString("text");
+            humanStr = this.decodeService.translate2Human(text);
         } catch (Exception ex){
-            return response.error(HttpStatus.BAD_REQUEST.value(), humanStr);
+            return response.error(HttpStatus.BAD_REQUEST.value(), "Ocurrio un error al procesar el pedido");
         }
 
 		return response.success(HttpStatus.OK.value(), humanStr);
 	}
 
     @PostMapping(value = "/translateHuman2Morse/")
-    public ApiJsonResponse<String> translate2Morse(@RequestBody String humanCode) {
+    public ApiJsonResponse<String> translate2Morse(@RequestBody String request) {
 
         ApiJsonResponse<String> response = new ApiJsonResponse<>();
-        String humanStr = "";
+        String morseCode;
         try {
-            humanStr = this.decodeService.translate2Human(humanCode);
+            JSONObject obj = new JSONObject(request);
+            String text = obj.getString("text");
+            morseCode = this.decodeService.decodeText2Morse(text);
         } catch (Exception ex){
-            return response.error(HttpStatus.BAD_REQUEST.value(), humanStr);
+            return response.error(HttpStatus.BAD_REQUEST.value(), "Ocurrio un error al procesar el pedido");
         }
 
-        return response.success(HttpStatus.OK.value(), humanStr);
+        return response.success(HttpStatus.OK.value(), morseCode);
     }
 }

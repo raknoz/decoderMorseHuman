@@ -12,6 +12,7 @@ import java.util.Map;
 public class DecodeServiceImpl implements DecodeService {
 
     final private String SEPARATE_WORD = "    ";
+    final private String SEPARATE_LETTER = " ";
     final private String CHAR_DOT = ".";
     final private String CHAR_LINE = "-";
     final private String CHAR_EMPTY = "";
@@ -33,24 +34,24 @@ public class DecodeServiceImpl implements DecodeService {
 
     @Override
     public String translate2Human(String morseCode) {
-        return null;
+        return this.translateMorse2Human(morseCode);
     }
 
     @Override
     public String decodeText2Morse(String texto) {
 
         String[] words = texto.toLowerCase().trim().split(" ");
-        String result = "";
+        String morseCode = "";
 
         for (String word : words) {
             for (int w = 0; w < word.length(); w++) {
                 Character caracter = word.substring(w, w + 1).charAt(0);
-                result += MorseUtils.getMorseFromLetter(caracter) + " ";
+                morseCode += MorseUtils.getMorseFromLetter(caracter) + " ";
             }
-            result += "   ";
+            morseCode += "  ";
         }
 
-        return result;
+        return morseCode.trim();
     }
 
     private String processBits(String bits, String[] listBits, String[] listPause) {
@@ -106,7 +107,7 @@ public class DecodeServiceImpl implements DecodeService {
         Map<String, String> params = new HashMap<>();
         params.put("CHAR_LINE" , line);
         params.put("CHAR_DOT" , dot);
-        params.put("SEPARATE_LATTER" , letterSpace);
+        params.put("SEPARATE_LETTER" , letterSpace);
         params.put("SEPARATE_WORD" , wordSpace);
 
         return this.generateMorseFromBits(bits, params);
@@ -117,7 +118,7 @@ public class DecodeServiceImpl implements DecodeService {
         String tempMorse = texto.replaceAll(params.get("SEPARATE_WORD"), SEPARATE_WORD);
         tempMorse = tempMorse.replaceAll(params.get("CHAR_LINE"), CHAR_LINE);
         tempMorse = tempMorse.replaceAll(params.get("CHAR_DOT"), CHAR_DOT);
-        tempMorse = tempMorse.replaceAll(params.get("SEPARATE_LATTER"), " ");
+        tempMorse = tempMorse.replaceAll(params.get("SEPARATE_LETTER"), SEPARATE_LETTER);
         tempMorse = tempMorse.replaceAll("0", CHAR_EMPTY);
 
         return tempMorse;
@@ -125,14 +126,14 @@ public class DecodeServiceImpl implements DecodeService {
 
     private String translateMorse2Human(String morseCode){
 
-        String[] splitWords = morseCode.split(SEPARATE_WORD);
+        String[] splitWords = morseCode.split(" ");
         String translate = "";
-        for(String words : splitWords){
-            String[] letters = words.split(" ");
-            for(String letter : letters){
-                translate += MorseUtils.getLetterFromMorse(letter);
+        for(String word : splitWords){
+            if(word.isEmpty()){
+                translate +=" ";
+            } else {
+                translate += MorseUtils.getLetterFromMorse(word);
             }
-            translate +=" ";
         }
 
         return translate;
