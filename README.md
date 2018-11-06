@@ -1,8 +1,8 @@
-### decoderMorseHuman
+## decoderMorseHuman
 Api para traducir bits a código Morse y Código morse a lenguaje humano.
 
 
-### Recomendaciones
+## Recomendaciones
 * Se recomienda que tanto los puntos como los trazos, mantengan un largo determinado, es decir que si se desea representar puntos con dos bits (11), el trazo no puede ser menor o igual al este. 
 Ejemplo:
   - 11 -> punto / 111 -> trazo = OK
