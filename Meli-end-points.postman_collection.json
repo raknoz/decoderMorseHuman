@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "fa8eb478-7b3f-42b2-8fbf-33da2d0e520b",
+		"name": "Meli-end-points",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "morse-translator",
+			"item": [
+				{
+					"name": "decodeBits2Morse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\" : \"111001110011100111000001111110011111100111111000001110011111100111001110000011100111111000000011111100111111000001110000011100111111001110011100000111001110\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/SpringBootRestApi/api/translateBits2Morse/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"SpringBootRestApi",
+								"api",
+								"translateBits2Morse",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decodeBits2Morse Heroku",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\" : \"111001110011100111000001111110011111100111111000001110011111100111001110000011100111111000000011111100111111000001110000011100111111001110011100000111001110\"\n}"
+						},
+						"url": {
+							"raw": "https://api-test-decode.herokuapp.com/SpringBootRestApi/api/translateBits2Morse/",
+							"protocol": "https",
+							"host": [
+								"api-test-decode",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"SpringBootRestApi",
+								"api",
+								"translateBits2Morse",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decodeMorse2Human",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\" : \".... --- .-.. .-     -- ..- -. -.. ---\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/SpringBootRestApi/api/translateMorse2Human/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"SpringBootRestApi",
+								"api",
+								"translateMorse2Human",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decodeBits2Morse 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\" : \"000101010100011011011000101101010001011000011011000101011000110100011010100011011011000\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/SpringBootRestApi/api/translateBits2Morse/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"SpringBootRestApi",
+								"api",
+								"translateBits2Morse",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decodeHuman2Morse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\" : \"hola mundo\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/SpringBootRestApi/api/translateHuman2Morse/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"SpringBootRestApi",
+								"api",
+								"translateHuman2Morse",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "status-carrier",
+			"item": [
+				{
+					"name": "(POST) package",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a214b54f-4387-471e-ba6b-9d4d7fa27e48",
+								"exec": [
+									"pm.test(\"Fail GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"28123B\",\n    \"inputs\": [\n        {\n            \"status\": \"not_delivered\",\n            \"substatus\": \"stolen\"\n         },\n         {\n            \"status\": \"handling\",\n            \"substatus\": \"manufacturing\"\n         },\n         {\n            \"status\": \"shipped\",\n            \"substatus\": null\n         }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api-shipping/package/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api-shipping",
+								"package",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(POST) package - fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a214b54f-4387-471e-ba6b-9d4d7fa27e48",
+								"exec": [
+									"pm.test(\"Fail GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"28123B\",\n    \"inputs\": [\n        {\n            \"status\": \"not_delivered\",\n            \"substatus\": \"stolen\"\n         },\n         {\n            \"status\": \"handling\",\n            \"substatus\": \"null\"\n         },\n         {\n            \"status\": \"shipped\",\n            \"substatus\": null\n         }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api-shipping/package/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api-shipping",
+								"package",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(GET) statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9001/api-shipping/statistics?date_from=&date_to=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api-shipping",
+								"statistics"
+							],
+							"query": [
+								{
+									"key": "date_from",
+									"value": ""
+								},
+								{
+									"key": "date_to",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(GET)  health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9001/api-shipping/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api-shipping",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "herokuapp -> package",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "83438dd8-606e-4361-8af2-ac22f9b92e45",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"28123B\",\n    \"inputs\": [\n        {\n            \"status\": \"ready_to_ship\",\n            \"substatus\": \"ready_to_print\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-shipping-status.herokuapp.com/api-shipping/package/",
+							"protocol": "https",
+							"host": [
+								"app-shipping-status",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api-shipping",
+								"package",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Heroku -> statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b28b4a3-ec2e-4b2c-a541-c7200ed4d797",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app-shipping-status.herokuapp.com/api-shipping/statistics?date_from=&date_to=",
+							"protocol": "https",
+							"host": [
+								"app-shipping-status",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api-shipping",
+								"statistics"
+							],
+							"query": [
+								{
+									"key": "date_from",
+									"value": ""
+								},
+								{
+									"key": "date_to",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Heroku -> health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app-shipping-status.herokuapp.com/api-shipping/health",
+							"protocol": "https",
+							"host": [
+								"app-shipping-status",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api-shipping",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
